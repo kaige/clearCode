@@ -1,0 +1,11 @@
+geom-console-site
+geom-console-site-backend
+dcs-design
+dcs-model
+dcs-model-backend
+parameter-model
+parametric-engine
+parammodelbuildservice
+parammodelservice
+modeling-app
+modeleditor
