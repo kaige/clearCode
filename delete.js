@@ -20,11 +20,26 @@ try {
     line = line.trim();
     if (line) {
       excludeNames.push(line);
-	  console.log('Exclude:', line);
+      console.log('Exclude:', line);
     }
   }
 } catch (err) {
   console.error(err);
+}
+
+//定义一个函数，接受一个字符串参数
+function isIntmediateFilesForCppProject(filePath) {
+  //定义一个数组，存储要检查的后缀名
+  let extensions = [".pdb", ".ilk", ".exp"];
+  //遍历数组，对每个后缀名进行判断
+  for (let ext of extensions) {
+    //如果文件路径以后缀名结尾，返回true
+    if (filePath.endsWith(ext)) {
+      return true;
+    }
+  }
+  //如果没有匹配到任何后缀名，返回false
+  return false;
 }
 
 // 循环遍历文件夹下所有以node_modules或target命名的文件夹，并删除它们里面的内容
@@ -48,7 +63,7 @@ function clearFolder(folder) {
         }
         if (stats.isDirectory()) {
           if (file === 'node_modules' || file === 'target') {
-			console.log('Meet Garbage');
+            console.log('Built files for Javasciprt and Java projects');
             // 判断文件夹是否包含exclude.txt里的名称
             let exclude = false;
             for (let name of excludeNames) {
@@ -70,12 +85,21 @@ function clearFolder(folder) {
             }
           }
           else {
-			files = [];
+            files = [];
             clearFolder(fullPath);
           }
         }
         else {
-          console.log('Not a Directory:', fullPath);
+          if (isIntmediateFilesForCppProject(fullPath)) {
+            fs.unlink(fullPath, (err) => {
+              if (err) {
+                console.error(err);
+                return;
+              }
+              console.log('Deleting', fullPath);
+            });
+          }
+          console.log('Skipping', fullPath);
         }
       });
     }
