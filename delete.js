@@ -27,10 +27,10 @@ try {
   console.error(err);
 }
 
-//定义一个函数，接受一个字符串参数
-function isIntmediateFilesForCppProject(filePath) {
+// check if the file is an intermediate files for cpp and c# project
+function isIntmediateFilesForCppCSharp(filePath) {
   //定义一个数组，存储要检查的后缀名
-  let extensions = [".pdb", ".ilk", ".exp"];
+  let extensions = [".pdb", ".ilk", ".exp", ".cache", ".tlb"];
   //遍历数组，对每个后缀名进行判断
   for (let ext of extensions) {
     //如果文件路径以后缀名结尾，返回true
@@ -90,7 +90,7 @@ function clearFolder(folder) {
           }
         }
         else {
-          if (isIntmediateFilesForCppProject(fullPath)) {
+          if (isIntmediateFilesForCppCSharp(fullPath)) {
             fs.unlink(fullPath, (err) => {
               if (err) {
                 console.error(err);
