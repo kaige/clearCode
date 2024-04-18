@@ -5,8 +5,8 @@ BTW, the code is mainly written by New Bing, I just made a little modification
 
 # Setup
 1. install Node.js on your computer
-2. download delete.js and package.json, go to the source folder, run 'npm install"
-3. put the want-to-ignore file or folder names in "exclude.txt", each in a row
+2. clone the source code, go to the source folder, run 'npm install"
+3. modify "exclude.txt" as needed, put the want-to-ignore file or folder names in that file, each in a row
 
 # Usage
 node delete.js "c:\mycode"
